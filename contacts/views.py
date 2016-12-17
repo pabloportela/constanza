@@ -3,7 +3,7 @@ from .ContactsManager import ContactsManager
 
 
 def index(request):
-	m = ContactsManager()
-	contacts = m.get()
-	return JsonResponse(contacts, safe=False)
+    m = ContactsManager()
+    contacts = m.get()
+    return JsonResponse(contacts, safe=False)
 	
