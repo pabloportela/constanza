@@ -13,16 +13,6 @@ class ContactsManager:
         return self.process_csv(r.text)
 
     def process_csv(self, csv):
-        results = []
-        rows = csv.splitlines()
-        for r in rows[1:]:
-            fields = r.split(',')
-            result = {}
-            for i,f in enumerate(fields[0:len(self.headers)]):
-                result[self.headers[i]] = f.strip()
-
-            results.append(result)
-                
-        return results
-        
+        rows = csv.splitlines()[1:]
+        return [ {header: field.strip() for header, field in zip(self.headers, r.split(','))} for r in rows ]
         
