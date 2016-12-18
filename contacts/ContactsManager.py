@@ -18,10 +18,9 @@ class ContactsManager:
         for r in rows[1:]:
             fields = r.split(',')
             result = {}
-            i = 0
-            for f in fields[0:len(self.headers)]:
+            for i,f in enumerate(fields[0:len(self.headers)]):
                 result[self.headers[i]] = f.strip()
-                i += 1
+
             results.append(result)
                 
         return results
