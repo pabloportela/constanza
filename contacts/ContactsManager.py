@@ -1,4 +1,5 @@
 import requests
+import csv
 
 '''
 handle contacts date from some google drive.
@@ -12,8 +13,8 @@ class ContactsManager:
         r = requests.get(self.url)
         return self.process_csv(r.text)
 
-    def process_csv(self, csv):
+    def process_csv(self, text):
         # skip headers
-        rows = csv.splitlines()[1:]
-        return [ {header: field.strip() for header, field in zip(self.headers, r.split(','))} for r in rows ]
-        
+        rows = text.splitlines()[1:]
+        return [{header: field.strip() for header, field in zip(self.headers, fields)} for fields in csv.reader(rows)]
+
