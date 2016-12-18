@@ -17,7 +17,6 @@ class ContactsManager:
         rows = csv.splitlines()
         for r in rows[1:]:
             fields = r.split(',')
-            print(fields)
             result = {}
             i = 0
             for f in fields[0:len(self.headers)]:
