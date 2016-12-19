@@ -8,6 +8,10 @@ logger = logging.getLogger(__name__)
 
 @cache_page(60 * 5)
 def index(request):
+    """
+    Returns an http response in json format with the parsed contacts information
+    from some predefined storage.
+    """
     if request.method != 'GET':
         return(JsonResponse(status=501))
 
