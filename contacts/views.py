@@ -2,6 +2,9 @@ from django.http import JsonResponse
 from django.http import HttpResponse
 from django.views.decorators.cache import cache_page
 from .ContactsManager import ContactsManager
+import logging
+
+logger = logging.getLogger(__name__)
 
 @cache_page(60 * 5)
 def index(request):
@@ -13,5 +16,5 @@ def index(request):
         contacts = m.get()
         return JsonResponse(contacts, safe=False)
     except Exception as e:
-        print(e) 
+        logger.error(e)
         return HttpResponse(status=500)
