@@ -1,7 +1,7 @@
 from django.http import JsonResponse
 from django.http import HttpResponse
 from django.views.decorators.cache import cache_page
-from .ContactsManager import ContactsManager
+from .GDocsContactsManager import GDocsContactsManager
 import logging
 
 logger = logging.getLogger(__name__)
@@ -16,7 +16,7 @@ def index(request):
         return(JsonResponse(status=501))
 
     try:
-        m = ContactsManager()
+        m = GDocsContactsManager()
         contacts = m.get()
         return JsonResponse(contacts, safe=False)
     except Exception as e:
