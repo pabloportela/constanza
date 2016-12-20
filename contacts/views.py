@@ -1,5 +1,5 @@
 from django.http import JsonResponse
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseServerError
 from django.views.decorators.cache import cache_page
 from .GDocsContactsManager import GDocsContactsManager
 import logging
@@ -13,7 +13,7 @@ def index(request):
     from some predefined storage.
     """
     if request.method != 'GET':
-        return(JsonResponse(status=501))
+        return HttpResponse(status=501)
 
     try:
         m = GDocsContactsManager()
@@ -21,4 +21,4 @@ def index(request):
         return JsonResponse(contacts, safe=False)
     except Exception as e:
         logger.error(e)
-        return HttpResponse(status=500)
+        return HttpResponseServerError()
